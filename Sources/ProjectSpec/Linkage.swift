@@ -14,6 +14,7 @@ extension Target {
         case .none,
              .appExtension,
              .application,
+             .extensionKitExtension,
              .bundle,
              .commandLineTool,
              .instrumentsPackage,
