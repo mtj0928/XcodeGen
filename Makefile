@@ -6,7 +6,7 @@ PREFIX = /usr/local
 INSTALL_PATH = $(PREFIX)/bin/$(EXECUTABLE_NAME)
 SHARE_PATH = $(PREFIX)/share/$(EXECUTABLE_NAME)
 CURRENT_PATH = $(PWD)
-REPO = https://github.com/yonaskolb/$(TOOL_NAME)
+REPO = https://github.com/mtj0928/$(TOOL_NAME)
 RELEASE_TAR = $(REPO)/archive/$(VERSION).tar.gz
 SHA = $(shell curl -L -s $(RELEASE_TAR) | shasum -a 256 | sed 's/ .*//')
 SWIFT_BUILD_FLAGS = --disable-sandbox -c release --arch arm64 --arch x86_64
@@ -32,7 +32,7 @@ format_code:
 
 release:
 	sed -i '' 's|\(let version = Version("\)\(.*\)\(")\)|\1$(VERSION)\3|' Sources/XcodeGen/main.swift
-	sed -i '' 's|\(.package(url: "https://github.com/yonaskolb/XcodeGen.git", from: "\)\(.*\)\(")\)|\1$(VERSION)\3|' README.md
+	sed -i '' 's|\(.package(url: "https://github.com/mtj0928/XcodeGen.git", from: "\)\(.*\)\(")\)|\1$(VERSION)\3|' README.md
 
 	git add .
 	git commit -m "Update to $(VERSION)"
