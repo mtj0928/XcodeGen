@@ -129,7 +129,9 @@ public class PBXProjGenerator {
             var explicitFileType: String?
             var lastKnownFileType: String?
             let fileType = Xcode.fileType(path: Path(target.filename))
-            if target.platform == .macOS || target.platform == .watchOS || target.type == .framework {
+            if target.type == .extensionKitExtension {
+                explicitFileType = "wrapper.extensionkit-extension"
+            } else if target.platform == .macOS || target.platform == .watchOS || target.type == .framework {
                 explicitFileType = fileType
             } else {
                 lastKnownFileType = fileType
@@ -1167,8 +1169,9 @@ public class PBXProjGenerator {
         }
 
         if !extensionKitExtensions.isEmpty {
+
             let copyFilesPhase = addObject(
-                getPBXCopyFilesBuildPhase(dstSubfolderSpec: .productsDirectory, dstPath: "$(EXTENSIONS_FOLDER_PATH)", name: "Embed App Extensions", files: extensionKitExtensions)
+                getPBXCopyFilesBuildPhase(dstSubfolderSpec: .productsDirectory, dstPath: "$(EXTENSIONS_FOLDER_PATH)", name: "Embed ExtensionKit Extensions", files: extensionKitExtensions)
             )
             buildPhases.append(copyFilesPhase)
         }
