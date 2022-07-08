@@ -38,12 +38,5 @@ release:
 	git commit -m "Update to $(VERSION)"
 	#git tag $(VERSION)
 
-publish: archive brew
-	echo "published $(VERSION)"
-
-brew:
-	brew update
-	brew bump-formula-pr --url=$(RELEASE_TAR) XcodeGen
-
 archive: build
 	./scripts/archive.sh "$(EXECUTABLE_PATH)"
